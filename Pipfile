@@ -4,9 +4,17 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
+pydocstyle = "*"
+pep8 = "*"
+prospector = "*"
+flake8 = "*"
+autopep8 = "*"
 
 [packages]
 django = "*"
+psycopg2-binary = "*"
+coverage = "*"
+coveralls = "*"
 
 [requires]
 python_version = "3.7"
