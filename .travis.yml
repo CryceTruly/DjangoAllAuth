@@ -1,0 +1,20 @@
+language: python
+
+python:
+  - "3.6"
+
+services:
+  - postgresql
+
+env:
+  - SECRET_KEY='coolsecretinformation'
+
+install:
+  - sudo pip install pipenv
+  - pipenv install --skip-lock
+
+script:
+  - coverage run --source='allauthdjango/apps' manage.py test && coverage report
+
+after_success:
+  - coveralls
