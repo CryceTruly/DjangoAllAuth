@@ -18,5 +18,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("api/", include("allauthdjango.apps.authentication.urls")),
+    path('api/', include(('allauthdjango.apps.authentication.urls',
+                          'authentication'), namespace='authentication')),
 ]

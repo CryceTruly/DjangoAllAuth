@@ -1,2 +1,3 @@
 web: gunicorn allauthdjango.wsgi
-release: python manage.py migrate --noinput
+release: python manage.py makemigrations
+release: python manage.py migrate
