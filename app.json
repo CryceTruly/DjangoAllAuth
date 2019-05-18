@@ -1,0 +1,16 @@
+{
+  "addons": [
+
+  ],
+  "buildpacks": [
+
+  ],
+  "env": {
+  },
+  "formation": {
+  },
+  "name": "DjangoAllAuth",
+  "scripts": {
+  },
+  "stack": "heroku-18"
+}
