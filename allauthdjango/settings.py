@@ -29,15 +29,18 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+AUTH_USER_MODEL = "authentication.User"
+
 # Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
-    'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'allauthdjango.apps.authentication',
+    'django.contrib.auth',
 ]
 
 MIDDLEWARE = [
@@ -86,6 +89,15 @@ DATABASES = {
     }
 
 }
+# REST FRAMEWORK CONFIG
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'allauthdjango.apps.authentication.core.JWTAuthentication',
+    ),
+
+}
+
+
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 
