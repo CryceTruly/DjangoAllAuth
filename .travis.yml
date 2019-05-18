@@ -10,8 +10,8 @@ env:
   - SECRET_KEY='coolsecretinformation'
 
 install:
-  - sudo pip install pipenv
-  - pipenv install --skip-lock
+  - pip install -r requirements.txt
+
 
 script:
   - coverage run --source='allauthdjango/apps' manage.py test && coverage report

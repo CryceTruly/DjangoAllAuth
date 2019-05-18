@@ -1,16 +1,20 @@
 {
-  "addons": [
-
-  ],
-  "buildpacks": [
-
-  ],
-  "env": {
-  },
-  "formation": {
-  },
   "name": "DjangoAllAuth",
   "scripts": {
-  },
-  "stack": "heroku-18"
-}
+       "postdeploy": "python manage.py makemigrations && python manage.py migrate"
+   },
+  "env": {},
+  "formation": {
+     "web": {
+       "quantity": 1
+     }
+   },
+   "addons": [
+     "heroku-postgresql"
+   ],
+   "buildpacks": [
+     {
+       "url": "heroku/python"
+     }
+   ]
+ }
