@@ -19,8 +19,6 @@ class EmailAuth(generics.GenericAPIView):
     def get(self, request):
         return Response({"msg": "Welcome email"})
 
-# Create your views here.
-
 
 class LinkedInCodeAPIView(generics.GenericAPIView):
     permision_classes = (AllowAny,)

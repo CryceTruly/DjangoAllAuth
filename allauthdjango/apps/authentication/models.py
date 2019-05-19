@@ -13,10 +13,6 @@ class UserManager(BaseUserManager):
             raise TypeError('Username is required')
         if email is None:
             return TypeError('Email is required')
-
-        # user = get_user_model().objects.create_user(
-        #     username=username, email=self.normalize_email(email))
-
         user = self.model(username=username, email=self.normalize_email(
             email))
         user.set_password(password)
