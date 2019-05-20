@@ -6,7 +6,6 @@ import jwt
 
 class JWTAuthentication(authentication.BaseAuthentication):
     def authenticate(self, request):
-
         header = request.META.get('HTTP_AUTHORIZATION', None)
         if header is None:
             raise exceptions.AuthenticationFailed(
