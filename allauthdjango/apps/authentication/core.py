@@ -1,5 +1,4 @@
 from rest_framework import authentication
-from rest_framework.response import Response
 from rest_framework import exceptions
 from .models import User
 import jwt
@@ -7,7 +6,6 @@ import jwt
 
 class JWTAuthentication(authentication.BaseAuthentication):
     def authenticate(self, request):
-
         header = request.META.get('HTTP_AUTHORIZATION', None)
         if header is None:
             raise exceptions.AuthenticationFailed(
@@ -20,8 +18,8 @@ class JWTAuthentication(authentication.BaseAuthentication):
 
         try:
             user = jwt.decode(token, 'secret')
-            newUser = User.objects.filter(username=user['username']).first()
+            new_user = User.objects.filter(username=user['username']).first()
 
-            return (newUser, token)
+            return (new_user, token)
         except Exception as identifier:
             raise exceptions.AuthenticationFailed("Token is not valid")

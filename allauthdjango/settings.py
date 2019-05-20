@@ -39,8 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'allauthdjango.apps.authentication',
     'django.contrib.auth',
+    'rest_framework',
+    'allauthdjango.apps.authentication',
 ]
 
 MIDDLEWARE = [
@@ -79,21 +80,19 @@ WSGI_APPLICATION = 'allauthdjango.wsgi.application'
 
 DATABASES = {
     'default': {
-
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ.get('DB_NAME', 'allauth'),
-        'USER': os.environ.get('DB_USER', 'postgres'),
-        'PASSWORD': os.environ.get('DB_PASSWORD', 'crycetruly'),
-        'HOST': os.environ.get('DB_HOST', 'localhost'),
-        'PORT': os.environ.get('DB_PORT', '5432')
+        'NAME': 'trulyauth',
+        'USER': 'postgres',
+        'PASSWORD': 'crycetruly',
+        'HOST': 'localhost',
+        'PORT': '5432'
     }
 
 }
 # REST FRAMEWORK CONFIG
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'allauthdjango.apps.authentication.core.JWTAuthentication',
-    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': [],
+    'DEFAULT_PERMISSION_CLASSES': [],
 
 }
 
