@@ -6,8 +6,8 @@ from django.http import HttpResponse, JsonResponse
 from allauthdjango.apps.authentication.renderer import UserRenderer
 from rest_framework.views import APIView
 import requests
-from .models import User
-
+from allauthdjango.apps.authentication.models import User
+from allauthdjango.apps.authentication.utils import Utils
 
 from django.contrib.auth import authenticate
 # Create your views here.
@@ -49,7 +49,8 @@ class LinkedInCodeAPIView(generics.GenericAPIView):
             "email": email_res['elements'][0]['handle~']['emailAddress'],
         }
         email = user_data['email']
-        username = user_data['last_name']
+        username = Utils.create_username(
+            user_data['first_name'], user_data['last_name'])
         filtered_user_by_email = User.objects.filter(email=email).first()
         if filtered_user_by_email:
             user = authenticate(
@@ -99,7 +100,8 @@ class GoogleAuthAPIView(APIView):
             "email": user_info['email'],
         }
         email = user_data['email']
-        username = user_data['last_name']
+        username = Utils.create_username(
+            user_data['first_name'], user_data['last_name'])
         filtered_user_by_email = User.objects.filter(email=email).first()
         if filtered_user_by_email:
             user = authenticate(
