@@ -6,4 +6,8 @@
 
 #### Linkedin get accesstoken
 
- ### [Linked login start start](https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=8698c10i50m1o1&redirect_uri=https://all-auth.herokuapp.com/api/linkedin&scope=r_liteprofile%20r_emailaddress%20w_member_social)
+### [Linked login start start](https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=8698c10i50m1o1&redirect_uri=https://all-auth.herokuapp.com/api/linkedin&scope=r_liteprofile%20r_emailaddress%20w_member_social)
+
+#### github
+
+### [github login start start](https://github.com/login/oauth/authorize?client_id=b5e4f3a2242f379806e0&redirect_uri=http://127.0.0.1:8000/api/github/&allow_signup=true)
