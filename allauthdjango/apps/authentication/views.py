@@ -8,7 +8,6 @@ from rest_framework.views import APIView
 import requests
 from allauthdjango.apps.authentication.models import User
 from allauthdjango.apps.authentication.utils import Utils
-import uncurl
 from django.contrib.auth import authenticate
 # Create your views here.
 
