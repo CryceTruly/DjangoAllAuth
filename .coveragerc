@@ -1,0 +1,15 @@
+[run]
+branch = true
+omit = */tests/*,
+ */migrations/*,
+ */urls.py,
+ */venv/*,
+ */settings.py,
+ */wsgi.py,
+ */apps.py,
+ manage.py,
+ fabfile.py
+source = .
+
+[report]
+show_missing = true

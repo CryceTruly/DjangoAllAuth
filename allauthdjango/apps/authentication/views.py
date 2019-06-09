@@ -6,7 +6,6 @@ from django.http import HttpResponse, JsonResponse
 from allauthdjango.apps.authentication.renderer import UserRenderer
 from rest_framework.views import APIView
 import requests
-from allauthdjango.apps.authentication.serializers import GoogleAuthSerializer
 from .models import User
 
 
@@ -80,9 +79,7 @@ class GoogleAuthAPIView(APIView):
     """
     Manage Google Login
     """
-    permission_classes = (AllowAny,)
     renderer_classes = (UserRenderer,)
-    serializer_class = GoogleAuthSerializer
 
     def post(self, request):
         token = request.data.get('access_token', None)
