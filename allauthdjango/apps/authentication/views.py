@@ -3,8 +3,10 @@ from rest_framework.permissions import AllowAny
 from rest_framework import generics, status
 from rest_framework.response import Response
 from django.http import HttpResponse, JsonResponse
-from .renderer import UserRenderer
+from allauthdjango.apps.authentication.renderer import UserRenderer
+from rest_framework.views import APIView
 import requests
+from allauthdjango.apps.authentication.serializers import GoogleAuthSerializer
 from .models import User
 
 
@@ -65,6 +67,59 @@ class LinkedInCodeAPIView(generics.GenericAPIView):
             User.objects.create_user(**user)
             user = User.objects.filter(email=email).first()
             user.is_verified = True
+            user.provider = "linkedin"
+            user.save()
+            new_user = authenticate(username=user.email, password="XXXXXXXX")
+            return Response({
+                'username': new_user.username,
+                'email': new_user.email,
+                'token': new_user.token})
+
+
+class GoogleAuthAPIView(APIView):
+    """
+    Manage Google Login
+    """
+    permission_classes = (AllowAny,)
+    renderer_classes = (UserRenderer,)
+    serializer_class = GoogleAuthSerializer
+
+    def post(self, request):
+        token = request.data.get('access_token', None)
+        if token is None:
+            return Response({
+                "message": "Please provide a token"
+            }, status.HTTP_401_UNAUTHORIZED)
+        user_info = requests.get(
+            "https://oauth2.googleapis.com/tokeninfo?id_token={}".format(token)).json()
+
+        if "error" in str(user_info):
+            return Response({"error": "Something went wrong,please try again"}, status.HTTP_401_UNAUTHORIZED)
+        user_data = {
+            'first_name': user_info['given_name'],
+            'last_name': user_info['family_name'],
+            'profilePic': user_info['picture'],
+            "email": user_info['email'],
+        }
+        email = user_data['email']
+        username = user_data['last_name']
+        filtered_user_by_email = User.objects.filter(email=email).first()
+        if filtered_user_by_email:
+            user = authenticate(
+                username=filtered_user_by_email.email, password='XXXXXXXX')
+            if user is not None:
+                return Response({
+                    'username': user.username,
+                    'email': user.email,
+                    'token': user.token})
+        else:
+            user = {'username': username,
+                    'email': email, 'password': 'XXXXXXXX'}
+
+            User.objects.create_user(**user)
+            user = User.objects.filter(email=email).first()
+            user.is_verified = True
+            user.provider = "google"
             user.save()
             new_user = authenticate(username=user.email, password="XXXXXXXX")
             return Response({
