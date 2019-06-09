@@ -28,7 +28,7 @@ class LinkedInCodeAPIView(generics.GenericAPIView):
     def get(self, request):
         code = request.GET.get('code')
         # GET ACCESS TOKEN
-        url = f"https://www.linkedin.com/oauth/v2/accessToken?grant_type=authorization_code&code={code}&client_id=8698c10i50m1o1&redirect_uri=http://127.0.0.1:8000/api/linkedin&client_secret=RO8ZGhoQLHce1X07"
+        url = f"https://www.linkedin.com/oauth/v2/accessToken?grant_type=authorization_code&code={code}&client_id=8698c10i50m1o1&redirect_uri=https://all-auth.herokuapp.com/api/linkedin&client_secret=RO8ZGhoQLHce1X07"
         accesstoken = requests.get(url)
         response = accesstoken.json()
         access_token = response.get('access_token', None)
