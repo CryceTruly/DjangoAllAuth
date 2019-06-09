@@ -47,6 +47,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     # A timestamp reprensenting when this object was last updated.
     updated_at = models.DateTimeField(auto_now=True)
+    provider = models.CharField(max_length=25)
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
 
@@ -61,5 +62,5 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def createToken(self):
         token = jwt.encode(
-            {'username': self.username, 'email': self.email}, 'secret', algorithm='HS256')
+            {'username': self.username, 'email': self.email}, 'secret', algorithm='HS256').decode("utf-8")
         return token
