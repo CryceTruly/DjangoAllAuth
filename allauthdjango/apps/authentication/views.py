@@ -131,7 +131,7 @@ class GithubLoginAPIView(APIView):
     def get(self, request):
         code = request.query_params.get('code')
         access_token = requests.get(
-            "https://github.com/login/oauth/access_token?client_id=b5e4f3a2242f379806e0&client_secret=7c7ee23c509b2c33715079ea6b1924a96fcf37ab&code={}".format(code)).text
+            "https://github.com/login/oauth/access_token?client_id={}&client_secret={}&code={}".format(os.environ.get('GITHUB_CLIENT_ID'),os.environ.get('GITHUB_CLIENT_SECRET'),code)).text
         if not "access_token" in access_token:
             return Response({"github": "something went wrong"}, status.HTTP_400_BAD_REQUEST)
 
@@ -168,7 +168,7 @@ class GithubLoginAPIView(APIView):
             User.objects.create_user(**user)
             user = User.objects.filter(email=email).first()
             user.is_verified = True
-            user.provider = "google"
+            user.provider = "github"
             user.save()
             new_user = authenticate(username=user.email, password="XXXXXXXX")
             return Response({
