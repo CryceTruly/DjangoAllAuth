@@ -15,7 +15,7 @@ dodgy==0.1.9
 entrypoints==0.3
 ez-setup==0.9
 facebook-sdk==3.1.0
-flake8==3.7.7
+flake8==3.7.8
 google-auth==1.6.3
 gunicorn==19.9.0
 idna==2.8
