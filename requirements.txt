@@ -20,7 +20,7 @@ google-auth==1.6.3
 gunicorn==19.9.0
 idna==2.8
 isort==4.3.20
-lazy-object-proxy==1.4.1
+lazy-object-proxy==1.4.3
 mccabe==0.6.1
 oauthlib==3.0.1
 pep8==1.7.1
