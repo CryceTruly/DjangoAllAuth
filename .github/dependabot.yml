@@ -1,0 +1,15 @@
+version: 2
+updates:
+- package-ecosystem: pip
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "02:00"
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: urllib3
+    versions:
+    - 1.26.3
+  - dependency-name: lazy-object-proxy
+    versions:
+    - 1.5.2
